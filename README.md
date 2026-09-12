@@ -1,5 +1,5 @@
 # it-infrastructure-devops-trainee
-#Overview
+Overview
 This project is a practical implementation of an IT Infrastructure and DevOps environment running on an AWS EC2 Ubuntu server.
 
 The project demonstrates:
@@ -16,7 +16,7 @@ The project demonstrates:
  Prometheus and Node Exporter monitoring
  Git branching and documentation
 
- #Architecture
+ # Architecture
  
                          Internet
                             │
@@ -55,7 +55,7 @@ The project demonstrates:
                                 ▼
                          Local Browser
                          localhost:9090
-#Infrastructure
+# Infrastructure
 
 AWS EC2
 The application is deployed on an AWS EC2 Ubuntu instance.
@@ -108,7 +108,7 @@ devops-trainee-assignment/
 ├── .gitignore
 └── README.md
 
-1. Linux & SSH Security
+# 1. Linux & SSH Security
 Create trainee user
 
 A dedicated trainee user was created and granted sudo privileges.
@@ -159,7 +159,7 @@ sudo systemctl status ssh --no-pager
 
 Important: The original SSH connection on port 22 was kept open until the new trainee connection on port 2222 was successfully tested.
 
-2. UFW Firewall
+# 2. UFW Firewall
 
 UFW was configured to allow only the required ports.
 
@@ -182,7 +182,7 @@ Expected rules:
 80/tcp      ALLOW
 443/tcp     ALLOW
 
-3. Docker Installation
+# 3. Docker Installation
 
 Docker was installed on the Ubuntu server.
 
@@ -201,7 +201,7 @@ After reconnecting, verify:
 
 docker --version
 docker compose version
-4. Docker Compose Application Stack
+# 4. Docker Compose Application Stack
 
 The application consists of four main services:
 
@@ -217,7 +217,7 @@ docker compose up -d --build
 Check containers:
 docker ps
 
-5. Nginx Reverse Proxy
+# 5. Nginx Reverse Proxy
 
 Nginx is used as the reverse proxy.
 
@@ -245,7 +245,7 @@ Expected:
 syntax is ok
 test is successful
 
-6.  Flask Application
+# 6.  Flask Application
 
 The Python Flask application runs inside its own Docker container.
 
@@ -263,7 +263,7 @@ Test from the EC2 server:
 curl http://localhost/
 curl http://localhost/health
 curl http://localhost/db-test
-7.  PostgreSQL Database
+# 7.  PostgreSQL Database
 
 PostgreSQL runs in a dedicated Docker container.
 
@@ -280,7 +280,7 @@ docker volume ls
 Check the database container:
 
 docker ps
-8. Database Persistence Test
+# 8. Database Persistence Test
 
 Database persistence was tested by:
 
@@ -298,7 +298,7 @@ docker ps
 
 The data should remain available after the restart because PostgreSQL uses a persistent Docker volume.
 
-9.  Infrastructure Health Check
+# 9.  Infrastructure Health Check
 
 The health-check script is located at:
 
@@ -331,7 +331,7 @@ Warnings are printed using:
 and written to:
 
 /var/log/infra_health.log
-10. Health Check Verification
+# 10. Health Check Verification
 
 Run:
 
@@ -357,7 +357,7 @@ Restart the application:
 
 docker start devops-app
 
-11.  Cron Automation
+# 11.  Cron Automation
 
 The health-check script is scheduled to run every 15 minutes.
 
@@ -404,7 +404,7 @@ sudo gzip -t /var/backups/db/db_backup_YYYYMMDD_HHMMSS.sql.gz
 
 A successful command produces no output and returns exit code 0.
 
-13. Database Restore
+# 12. Database Restore
 
 A backup can be restored into PostgreSQL using the following process.
 
@@ -418,8 +418,9 @@ docker exec -i devops-db sh -c 'gunzip -c /tmp/restore.sql.gz | psql -U devopsus
 
 Verify the restored database:
 
-docker exec -it devops-db psql -U devopsuser -d devopsdb
-14. Prometheus Monitoring
+docker exec -it devops-db psql -U devopsuser -d devopsdb 
+
+# 13. Prometheus Monitoring
 
 Prometheus is used for infrastructure monitoring.
 
@@ -449,7 +450,7 @@ Status → Targets
 
 The Prometheus and Node Exporter targets should be available.
 
-15. Browser Verification
+# 14. Browser Verification
 
 The application can be accessed through the Nginx reverse proxy using:
 
@@ -467,7 +468,7 @@ Flask :5000
 
 The backend application port is not directly exposed to the internet.
 
-16. Verification Commands
+# 15. Verification Commands
 Check UFW
 sudo ufw status verbose
 Check SSH
@@ -490,7 +491,7 @@ Check backups
 sudo ls -lh /var/backups/db/
 Check Docker Compose
 docker compose ps
-17. Git Branching Strategy
+# 16. Git Branching Strategy
 
 The project uses separate branches for major configuration tasks.
 
@@ -538,7 +539,7 @@ Check history:
 
 git log --oneline --graph --all
 
-18. Setup Instructions
+# 17. Setup Instructions
 Clone the repository
 git clone <YOUR_GITHUB_REPOSITORY_URL>
 cd devops-trainee-assignment
@@ -549,7 +550,7 @@ docker ps
 
 Test:
 curl http://localhost/
-19. Teardown
+# 18. Teardown
 
 Stop the containers:
 
@@ -566,7 +567,7 @@ To remove the database volume:
 docker compose down -v
 Warning: Removing the volume deletes the PostgreSQL persistent data.
 
-20. Troubleshooting
+# 19. Troubleshooting
 --Check container logs
 --docker logs devops-nginx
 --docker logs devops-app
@@ -584,6 +585,6 @@ Warning: Removing the volume deletes the PostgreSQL persistent data.
 --Check listening ports
 --sudo ss -tlnp
 
-23.  Conclusion
+# 20.  Conclusion
 
 This project demonstrates a complete basic DevOps infrastructure workflow on AWS, including Linux administration, SSH hardening, firewall configuration, containerized application deployment, reverse proxying, database persistence, automation, backup and recovery, monitoring, and Git-based project management.
