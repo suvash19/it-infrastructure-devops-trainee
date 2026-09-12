@@ -564,56 +564,26 @@ The PostgreSQL named volume is intentionally preserved unless explicitly removed
 To remove the database volume:
 
 docker compose down -v
-
 Warning: Removing the volume deletes the PostgreSQL persistent data.
 
 20. Troubleshooting
-Check container logs
-docker logs devops-nginx
-docker logs devops-app
-docker logs devops-db
-Check all containers
-docker compose ps
-Restart the stack
-docker compose restart
-Rebuild the application
-docker compose up -d --build
-Check Nginx configuration
-docker exec devops-nginx nginx -t
-Check SSH configuration
-sudo sshd -t
-Check listening ports
-sudo ss -tlnp
+--Check container logs
+--docker logs devops-nginx
+--docker logs devops-app
+--docker logs devops-db
+--Check all containers
+--docker compose ps
+--Restart the stack
+--docker compose restart
+--Rebuild the application
+--docker compose up -d --build
+--Check Nginx configuration
+--docker exec devops-nginx nginx -t
+--Check SSH configuration
+--sudo sshd -t
+--Check listening ports
+--sudo ss -tlnp
 
-22. ✅ Final Verification Checklist
-Requirement	Status
-AWS Ubuntu EC2 environment	✅
-trainee user created	✅
-Sudo access configured	✅
-Root SSH login disabled	✅
-Password SSH authentication disabled	✅
-SSH key authentication enabled	✅
-SSH moved to port 2222	✅
-UFW configured	✅
-Docker installed	✅
-Docker Compose configured	✅
-Nginx reverse proxy	✅
-Flask application	✅
-PostgreSQL database	✅
-Persistent database volume	✅
-Infrastructure health script	✅
-Disk warning threshold >85%	✅
-Application status monitoring	✅
-Health-check log	✅
-Cron every 15 minutes	✅
-Database backup	✅
-Database restore procedure	✅
-Prometheus monitoring	✅
-Node Exporter	✅
-Git feature branches	✅
-Meaningful commits	✅
-README documentation	✅
-Required screenshots	✅
-23. 📋 Conclusion
+23.  Conclusion
 
 This project demonstrates a complete basic DevOps infrastructure workflow on AWS, including Linux administration, SSH hardening, firewall configuration, containerized application deployment, reverse proxying, database persistence, automation, backup and recovery, monitoring, and Git-based project management.
